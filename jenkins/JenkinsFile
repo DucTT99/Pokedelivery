@@ -1,0 +1,31 @@
+pipeline {
+    agent any
+
+    // triggers {
+    //     githubPush()
+    // }
+
+    // environment {
+    //     API_URL = 'http://localhost:3000/api/test'
+    // }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                echo 'Checking out code...'
+            }
+        }
+
+        // stage('Build') {
+        //     steps {
+        //         sh './build.sh'  // or your actual build command
+        //     }
+        // }
+
+        // stage('Test API') {
+        //     steps {
+        //         sh 'curl -X GET $API_URL'
+        //     }
+        // }
+    }
+}
