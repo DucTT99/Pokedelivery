@@ -50,6 +50,8 @@ curl -fsSL https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bas
                 dir("api") {
                     echo 'Building API...'
                     sh '''
+                        npm install
+                        npm run build
                         npm ci
                         npx func start
                     '''
