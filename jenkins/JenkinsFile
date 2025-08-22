@@ -17,11 +17,23 @@ pipeline {
             }
         }
 
-        // stage('Build') {
-        //     steps {
-        //         sh './build.sh'  // or your actual build command
-        //     }
-        // }
+        stage('Build') {
+            steps {
+                sh '''
+                    curl -fsSL https://deb.nodesource.com/setup_$NODE_VERSION | sudo -E bash -
+                    sudo apt-get install -y nodejs
+                    node -v
+                    npm -v
+                '''
+                dir('api') {
+                    sh '''
+                        npm ci
+                        npx func start
+                    '''
+                }
+            }
+        }
+
 
         // stage('Test API') {
         //     steps {
