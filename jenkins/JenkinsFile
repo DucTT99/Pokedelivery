@@ -5,9 +5,10 @@ pipeline {
     //     githubPush()
     // }
 
-    // environment {
-    //     API_URL = 'http://localhost:3000/api/test'
-    // }
+    environment {
+        NODE_VERSION = 'v22.5.1' // Change to your desired Node.js version
+    }
+
 
     stages {
         stage('Checkout') {
@@ -17,29 +18,43 @@ pipeline {
             }
         }
 
-        stage('Build') {
+        stage('Setup Node.js') {
             steps {
                 sh '''
-                    curl -fsSL https://deb.nodesource.com/setup_$NODE_VERSION | sudo -E bash -
-                    sudo apt-get install -y nodejs
+                    # Install NVM if not already installed
+                    if [ ! -d "$HOME/.nvm" ]; then
+curl -fsSL https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+                    fi
+ 
+                    export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+ 
+                    # Install and use Node.js 22.5.1
+                    nvm install 22.5.1
+                    nvm use 22.5.1
+                    nvm alias default 22.5.1
+ 
                     node -v
                     npm -v
                 '''
-                dir('api') {
-                    sh '''
-                        npm ci
-                        npx func start
-                    '''
-                }
+            }
+        }
+ 
+        stage('Build') {
+            steps {
+                sh '''
+                    export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+                    nvm use 22.5.1
+ 
+                    npm install
+                    npm run build
+                '''
             }
         }
 
 
-        // stage('Test API') {
-        //     steps {
-        //         sh 'curl -X GET $API_URL'
-        //     }
-        // }
+
     }
 
     post {
