@@ -47,7 +47,7 @@ pipeline {
                     sh '''
                         export NVM_DIR="$HOME/.nvm"
                         [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
-                        node api/test.js
+                        node getPokemon/test.js
                     '''
                 }
             }
