@@ -10,9 +10,31 @@ pipeline {
     // }
 
     stages {
+        stage('Install Git') {
+            steps {
+                echo 'Checking for Git...'
+                sh '''
+                    if ! command -v git &> /dev/null; then
+                        echo "Git not found. Installing..."
+                        if [ -f /etc/debian_version ]; then
+                            sudo apt update && sudo apt install git -y
+                        elif [ -f /etc/redhat-release ]; then
+                            sudo yum install git -y
+                        else
+                            echo "Unsupported OS. Please install Git manually."
+                            exit 1
+                        fi
+                    else
+                        echo "Git is already installed."
+                    fi
+                '''
+            }
+        }
+
         stage('Checkout') {
             steps {
                 echo 'Checking out code...'
+                checkout scm
             }
         }
 
