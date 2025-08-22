@@ -47,11 +47,7 @@ pipeline {
                     sh '''
                         export NVM_DIR="$HOME/.nvm"
                         [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
-                        nvm use 22.5.1
-
-
-                        npm ci
-                        node node_modules/azure-functions-core-tools/bin/func start
+                        node api/test.js
                     '''
                 }
             }
