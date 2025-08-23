@@ -18,27 +18,69 @@ pipeline {
             }
         }
 
+        stage('Restore Cache') {
+            steps {
+                script {
+                // Restore NVM and node_modules if available
+                try {
+                    unstash 'nvm-cache'
+                    echo "✅ Restored NVM cache"
+                } catch (e) {
+                    echo "⚠️ No NVM cache found"
+                }
+
+                try {
+                    unstash 'npm-cache'
+                    echo "✅ Restored npm cache"
+                } catch (e) {
+                    echo "⚠️ No npm cache found"
+                }
+                }
+            }
+        }
+
         stage('Setup Node.js') {
             steps {
                 sh '''
-                    # Install NVM if not already installed
-                    if [ ! -d "$HOME/.nvm" ]; then
+                if [ ! -d "$HOME/.nvm" ]; then
                     curl -fsSL https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
-                    fi
- 
-                    export NVM_DIR="$HOME/.nvm"
-                    [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
- 
-                    # Install and use Node.js 22.5.1
-                    nvm install 22.5.1
-                    nvm use 22.5.1
-                    nvm alias default 22.5.1
- 
-                    node -v
-                    npm -v
+                fi
+
+                export NVM_DIR="$HOME/.nvm"
+                [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+
+                nvm install 22.5.1
+                nvm use 22.5.1
+                nvm alias default 22.5.1
+
+                node -v
+                npm -v
                 '''
             }
         }
+
+        stage('Install Dependencies') {
+            steps {
+                dir('api') {
+                sh '''
+                    export NVM_DIR="$HOME/.nvm"
+                    [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+                    nvm use 22.5.1
+
+                    npm ci
+                '''
+                }
+            }
+        }
+
+        stage('Cache Artifacts') {
+            steps {
+                stash includes: '.nvm/**', name: 'nvm-cache'
+                stash includes: 'api/node_modules/**', name: 'npm-cache'
+                echo "📦 Cached NVM and npm dependencies"
+            }
+        }
+
  
         stage('Build') {
             steps {
@@ -66,6 +108,11 @@ pipeline {
         failure {
             echo 'Pipeline failed.'
         }
+    
+        always {
+            cleanWs()
+        }
+
     }
 
 }
