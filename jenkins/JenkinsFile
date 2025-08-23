@@ -5,37 +5,12 @@ pipeline {
     //     githubPush()
     // }
 
-    environment {
-        NODE_VERSION = 'v22.5.1' // Change to your desired Node.js version
-    }
-
 
     stages {
         stage('Checkout') {
             steps {
                 echo 'Checking out code...'
                 checkout scm
-            }
-        }
-
-        stage('Restore Cache') {
-            steps {
-                script {
-                // Restore NVM and node_modules if available
-                try {
-                    unstash 'nvm-cache'
-                    echo "✅ Restored NVM cache"
-                } catch (e) {
-                    echo "⚠️ No NVM cache found"
-                }
-
-                try {
-                    unstash 'npm-cache'
-                    echo "✅ Restored npm cache"
-                } catch (e) {
-                    echo "⚠️ No npm cache found"
-                }
-                }
             }
         }
 
@@ -70,14 +45,6 @@ pipeline {
                     npm ci
                 '''
                 }
-            }
-        }
-
-        stage('Cache Artifacts') {
-            steps {
-                stash includes: '.nvm/**', name: 'nvm-cache'
-                stash includes: 'api/node_modules/**', name: 'npm-cache'
-                echo "📦 Cached NVM and npm dependencies"
             }
         }
 
