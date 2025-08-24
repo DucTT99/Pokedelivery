@@ -42,7 +42,7 @@ pipeline {
                     [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
                     nvm use 22.5.1
 
-                    npm ci
+                    npm install
                 '''
                 }
             }
