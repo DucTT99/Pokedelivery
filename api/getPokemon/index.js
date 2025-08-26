@@ -8,7 +8,7 @@ module.exports = async function (context, req) {
         electric: 'Salmon',
         fire: 'Tuna',
         water: 'Mackerel',
-        grass: 'Avocado Rolls',
+        grass: 'Avocado Roll',
         psychic: 'Tamago',
         rock: 'Cucumber',
         ground: 'Daikon',
