@@ -8,16 +8,12 @@ pipeline {
 
     stages {
 
-        stage('Branch Check') {
-            when {
-                expression {
-                    return env.BRANCH_NAME != 'main'
-                }
-            }
+        stage('branch Check') {
             steps {
                 echo "Building branch: ${env.BRANCH_NAME}"
             }
         }
+
 
         stage('Checkout') {
             steps {
@@ -27,6 +23,12 @@ pipeline {
         }
 
         stage('Setup Node.js') {
+            when {
+                expression {
+                    return env.BRANCH_NAME != 'main'
+                }
+            }
+
             steps {
                 sh '''
                 if [ ! -d "$HOME/.nvm" ]; then
@@ -47,6 +49,13 @@ pipeline {
         }
 
         stage('Install Dependencies') {
+
+            when {
+                expression {
+                    return env.BRANCH_NAME != 'main'
+                }
+            }
+
             steps {
                 dir('api') {
                 sh '''
@@ -62,6 +71,13 @@ pipeline {
 
  
         stage('Build') {
+
+            when {
+                expression {
+                    return env.BRANCH_NAME != 'main'
+                }
+            }
+
             steps {
                 dir("api") {
                     echo 'Building API...'
