@@ -7,6 +7,18 @@ pipeline {
 
 
     stages {
+
+        stage('Branch Check') {
+            when {
+                expression {
+                    return env.BRANCH_NAME != 'main'
+                }
+            }
+            steps {
+                echo "Building branch: ${env.BRANCH_NAME}"
+            }
+        }
+
         stage('Checkout') {
             steps {
                 echo 'Checking out code...'
