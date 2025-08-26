@@ -84,7 +84,7 @@ Das Dev Team hat bereits eine Entwicklerversion der APP auf Basis des `Requireme
 
 ## Wissenswertes
 
-- Lina message
+- test webhook
 ### Videos
 
 | 🎥 **Kursname**                                                       | 🔗 **URL**                                                                                   | 🎯 **Fokus im Bootcamp**                                      |
