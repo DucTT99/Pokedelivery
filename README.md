@@ -84,7 +84,7 @@ Das Dev Team hat bereits eine Entwicklerversion der APP auf Basis des `Requireme
 
 ## Wissenswertes
 
-- test webhook
+- test webhook2
 ### Videos
 
 | 🎥 **Kursname**                                                       | 🔗 **URL**                                                                                   | 🎯 **Fokus im Bootcamp**                                      |
