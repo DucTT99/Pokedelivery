@@ -1,4 +1,8 @@
+
+
 const getPokemon = require('./index');
+
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
 const context = {
     res: null
@@ -6,7 +10,7 @@ const context = {
 
 const req = {
     query: {
-        name: 'bulbasaur'
+        name: 'pikachu'
     }
 };
 
