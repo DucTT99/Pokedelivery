@@ -26,7 +26,7 @@ module.exports = async function (context, req) {
         fighting: 'Protein Roll',
         flying: 'Airy Rice Ball',
         normal: 'Classic Nigiri'
-    };
+    };.
 
     
 
