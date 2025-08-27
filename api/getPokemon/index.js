@@ -43,7 +43,8 @@ module.exports = async function (context, req) {
             }
 
             const types = body.types || [];
-            const favoriteFood = body.favoriteFood || (types[0] && sushiPreferences[types[0]]) : undefined);
+            const favoriteFood = body.favoriteFood || (types[0] ? sushiPreferences[types[0]] : undefined);
+        
 
             const NewPokemon = {
                 name: pokeName,
