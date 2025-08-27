@@ -1,5 +1,17 @@
 const axios = require('axios');
 
+const buildInPokemon = {
+    marcus: {
+        name: 'MARCUS',
+        id: 42,
+        height: 999999,
+        weight: 999999,
+        base_experience: 999999,
+        types: ['everything', 'and', 'more'],
+        favoriteFood: 'coffee'
+    }
+};
+
 const costumePokemon = {}; // In-memory store, nur solange Prozess läuft
 
 module.exports = async function (context, req) {
@@ -66,10 +78,20 @@ module.exports = async function (context, req) {
         }
 
         if (req.method === 'GET') {
-            if (costumePokemon[name.toLowerCase()]) {
+            const lowerName = name.toLowerCase();
+
+            if (costumePokemon[lowerName]) {
                 context.res = {
                     status: 200,
-                    body: costumePokemon[name.toLowerCase()]
+                    body: costumePokemon[lowerName]
+                };
+                return;
+            }
+
+            if (buildInPokemon[lowerName]) {
+                context.res = {
+                    status: 200,
+                    body: buildInPokemon[lowerName]
                 };
                 return;
             }
