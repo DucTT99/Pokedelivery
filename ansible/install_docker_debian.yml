@@ -1,0 +1,62 @@
+---
+- name: Install Docker and set up Jenkins on Debian-based systems
+  hosts: azure
+  become: true
+  vars:
+    jenkins_url: "XXXXX"
+    jenkins_secret: "XXXXX"
+    jenkins_agent_name: "XXXXXX"
+
+
+  tasks:
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+
+    - name: Install required packages
+      apt:
+        name:
+          - ca-certificates
+          - curl
+        state: present
+
+    - name: Create keyrings directory
+      file:
+        path: /etc/apt/keyrings
+        state: directory
+        mode: '0755'
+
+    - name: Download Docker GPG key
+      get_url:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        dest: /etc/apt/keyrings/docker.asc
+        mode: '0644'
+
+    - name: Add Docker repository
+      copy:
+        dest: /etc/apt/sources.list.d/docker.list
+        content: |
+          deb [arch={{ ansible_architecture }} signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu {{ ansible_lsb.codename }} stable
+
+    - name: Update apt cache after adding Docker repo
+      apt:
+        update_cache: yes
+
+    - name: Install Docker packages
+      apt:
+        name:
+          - docker-ce
+          - docker-ce-cli
+          - containerd.io
+          - docker-buildx-plugin
+          - docker-compose-plugin
+        state: present
+      
+    - name: Run Jenkins agent container
+      shell: >
+        docker run --init jenkins/inbound-agent
+        -url {{ jenkins_url }}
+        {{ jenkins_secret }}
+        {{ jenkins_agent_name }}
+      args:
+        executable: /bin/bash
