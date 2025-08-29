@@ -11,7 +11,7 @@ const context = {
 const req = {
     params: {
         name: 'pikachu'
-    }
+    },
     method: 'GET',
 };
 
