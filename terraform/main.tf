@@ -18,7 +18,7 @@ provider "azurerm" {
 # Variables
 #################################################
 variable "resource_group_name" {
-  default = "rg-demo"
+  default = "Pokedelivery"
 }
  
 variable "location" {
@@ -37,13 +37,13 @@ resource "azurerm_resource_group" "rg" {
 # Networking
 #################################################
 resource "azurerm_virtual_network" "vnet" {
-  name                = "demo-vnet"
+  name                = "pokevnet"
 address_space = ["10.0.0.0/16"]
   location            = azurerm_resource_group.rg.location
 resource_group_name = azurerm_resource_group.rg.name
 }
  
-resource "azurerm_subnet" "subnet" {
+resource "azurerm_subnet" "pokesubnet" {
   name                 = "demo-subnet"
 resource_group_name = azurerm_resource_group.rg.name
 virtual_network_name = azurerm_virtual_network.vnet.name
@@ -51,7 +51,7 @@ address_prefixes = ["10.0.1.0/24"]
 }
  
 resource "azurerm_network_security_group" "nsg" {
-  name                = "demo-nsg"
+  name                = "nsg1"
   location            = azurerm_resource_group.rg.location
 resource_group_name = azurerm_resource_group.rg.name
  
@@ -178,7 +178,7 @@ resource_group_name = azurerm_resource_group.rg.name
 # Application Insights
 #################################################
 resource "azurerm_application_insights" "appinsights" {
-  name                = "funcapp-ai-${random_string.rand.result}"
+  name                = "funcapp-${random_string.rand.result}"
   location            = azurerm_resource_group.rg.location
 resource_group_name = azurerm_resource_group.rg.name
   application_type    = "web"
@@ -188,7 +188,7 @@ resource_group_name = azurerm_resource_group.rg.name
 # Function App (with Application Insights)
 #################################################
 resource "azurerm_linux_function_app" "functionapp" {
-  name                       = "my-function-app-${random_string.rand.result}"
+  name                       = "Pokedelivery-${random_string.rand.result}"
   location                   = azurerm_resource_group.rg.location
 resource_group_name = azurerm_resource_group.rg.name
 service_plan_id = azurerm_service_plan.plan.id
