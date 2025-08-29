@@ -5,3 +5,6 @@
 - install Docker Desktop (with WSL2) separately
 - change to `/api`-dir
 - call `npm ci`, followed by `npx func start`
+
+
+test für präsi
