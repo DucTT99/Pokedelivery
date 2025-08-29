@@ -9,9 +9,10 @@ const context = {
 };
 
 const req = {
-    query: {
+    params: {
         name: 'pikachu'
     }
+    method: 'GET',
 };
 
 getPokemon(context, req).then(() => {
