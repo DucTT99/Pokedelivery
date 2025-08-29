@@ -18,6 +18,8 @@ pipeline {
         stage('Checkout') {
             steps {
                 echo 'Checking out code...'
+                sudo apt update
+                sudo apt install git
                 checkout scm
             }
         }
