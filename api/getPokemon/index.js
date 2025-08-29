@@ -10,7 +10,7 @@ const buildInPokemon = {
         base_experience: 999999,
         types: ['everything', 'and', 'more'],
         favoriteFood: 'coffee'
-    };
+    },
     karan: { name: 'KARAN', id: 101, height: 10, weight: 10, base_experience: 10000, types: ['focus', 'strategy'], favoriteFood: 'Haribo' },
     eren: { name: 'EREN', id: 102, height: 10, weight: 10, base_experience: 10000, types: ['determination', 'storm'], favoriteFood: 'Bounty' },
     fatih: { name: 'FATIH', id: 103, height: 10, weight: 10, base_experience: 10000, types: ['shield', 'wisdom'], favoriteFood: 'Pickup' },
