@@ -6,4 +6,4 @@
 - change to `/api`-dir
 - call `npm ci`, followed by `npx func start`
 
-test
+test3
