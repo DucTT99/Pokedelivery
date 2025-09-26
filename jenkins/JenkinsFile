@@ -8,14 +8,15 @@ pipeline {
 
     stages {
 
-        stage('branch Check') {
+        stage('Lint Test') {
             steps {
                 echo "Building branch: ${env.BRANCH_NAME}"
             }
-        }
+        } 
+// branch check
 
 
-        stage('Checkout') {
+        stage('API Test') {
             steps {
                 echo 'Checking out code...'
                 sh """
@@ -25,8 +26,9 @@ pipeline {
                 checkout scm
             }
         }
+// checkout
 
-        stage('Setup Node.js') {
+        stage('Build') {
             when {
                 expression {
                     return env.BRANCH_NAME != 'main'
@@ -51,8 +53,8 @@ pipeline {
                 '''
             }
         }
-
-        stage('Install Dependencies') {
+//setup nodejs
+        stage('Package') {
 
             when {
                 expression {
@@ -74,7 +76,7 @@ pipeline {
         }
 
  
-        stage('Build') {
+        stage('Deploy') {
 
             when {
                 expression {
@@ -94,7 +96,7 @@ pipeline {
             }
         }
 
-
+//build
 
     }
 
