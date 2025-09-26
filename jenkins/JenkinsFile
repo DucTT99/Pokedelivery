@@ -37,14 +37,16 @@ pipeline {
         }
 //setup nodejs
         stage('Package') {
-
-            echo "bla"
+            steps {
+                echo "bla"
+            }
         }
 
  
         stage('Deploy') {
-
-            echo "bla"
+            steps {
+                echo "bla"
+            }
         }
 
 //build
