@@ -25,12 +25,6 @@ pipeline {
 // checkout
 
         stage('Build') {
-            when {
-                expression {
-                    return env.BRANCH_NAME != 'main'
-                }
-            }
-
             steps {
                 echo "bla"
             }
