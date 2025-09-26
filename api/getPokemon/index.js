@@ -11,9 +11,9 @@ const buildInPokemon = {
         types: ['everything', 'and', 'more'],
         favoriteFood: 'coffee'
     },
-    karan: { name: 'KARAN', id: 101, height: 10, weight: 10, base_experience: 10000, types: ['focus', 'strategy'], favoriteFood: 'Haribo' },
-    eren: { name: 'EREN', id: 102, height: 10, weight: 10, base_experience: 10000, types: ['determination', 'storm'], favoriteFood: 'Bounty' },
-    fatih: { name: 'FATIH', id: 103, height: 10, weight: 10, base_experience: 10000, types: ['shield', 'wisdom'], favoriteFood: 'Pickup' },
+    berry: { name: 'BERRY', id: 101, height: 10, weight: 10, base_experience: 10000, types: ['focus', 'strategy'], favoriteFood: 'Haribo' },
+    axel: { name: 'AXEL', id: 102, height: 10, weight: 10, base_experience: 10000, types: ['determination', 'storm'], favoriteFood: 'Bounty' },
+    maheshvar: { name: 'MAHESHVAR', id: 103, height: 10, weight: 10, base_experience: 10000, types: ['shield', 'wisdom'], favoriteFood: 'Pickup' },
     duc: { name: 'DUC', id: 104, height: 10, weight: 10, base_experience: 10000, types: ['speed', 'tech'], favoriteFood: 'Ferrero' },
     jessica: { name: 'JESSICA', id: 105, height: 10, weight: 10, base_experience: 10000, types: ['light', 'grace'], favoriteFood: 'Knoppers' },
     matthias: { name: 'MATTHIAS', id: 106, height: 10, weight: 10, base_experience: 10000, types: ['logic', 'earth'], favoriteFood: 'Kinderriegel' },
