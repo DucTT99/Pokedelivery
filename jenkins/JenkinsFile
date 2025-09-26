@@ -19,11 +19,7 @@ pipeline {
         stage('API Test') {
             steps {
                 echo 'Checking out code...'
-                sh """
-                sudo apt update
-                sudo apt install git
-                """
-                checkout scm
+
             }
         }
 // checkout
@@ -36,64 +32,19 @@ pipeline {
             }
 
             steps {
-                sh '''
-                if [ ! -d "$HOME/.nvm" ]; then
-                    curl -fsSL https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
-                fi
-
-                export NVM_DIR="$HOME/.nvm"
-                [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
-
-                nvm install 22.5.1
-                nvm use 22.5.1
-                nvm alias default 22.5.1
-
-                node -v
-                npm -v
-                '''
+                echo "bla"
             }
         }
 //setup nodejs
         stage('Package') {
 
-            when {
-                expression {
-                    return env.BRANCH_NAME != 'main'
-                }
-            }
-
-            steps {
-                dir('api') {
-                sh '''
-                    export NVM_DIR="$HOME/.nvm"
-                    [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
-                    nvm use 22.5.1
-
-                    npm install
-                '''
-                }
-            }
+            echo "bla"
         }
 
  
         stage('Deploy') {
 
-            when {
-                expression {
-                    return env.BRANCH_NAME != 'main'
-                }
-            }
-
-            steps {
-                dir("api") {
-                    echo 'Building API...'
-                    sh '''
-                        export NVM_DIR="$HOME/.nvm"
-                        [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
-                        node getPokemon/test.js
-                    '''
-                }
-            }
+            echo "bla"
         }
 
 //build
