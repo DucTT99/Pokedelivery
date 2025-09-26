@@ -1,5 +1,5 @@
 pipeline {
-    agent { label "Deploy"}
+    //agent { label "Deploy"}
 
     // triggers {
     //     githubPush()
